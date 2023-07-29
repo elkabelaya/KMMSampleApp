@@ -3,6 +3,7 @@ package com.elkabelaya.kmmsampleapp.android
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -14,28 +15,46 @@ import com.elkabelaya.kmmsampleapp.FirstScreenComponent
 
 
 @Composable
-fun FirstScreenUI(FirstScreenComponent: FirstScreenComponent) {
-    val state by FirstScreenComponent.state.subscribeAsState()
+fun FirstScreenUI(firstScreenComponent: FirstScreenComponent) {
+    val state by firstScreenComponent.state.subscribeAsState()
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.padding()
     ) {
-        Spacer(modifier = Modifier.weight(1F))
-
         Text(text = "${state.count}")
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        Button(onClick = FirstScreenComponent::onIncrease) {
+        TextField(value = state.text,
+            onValueChange = firstScreenComponent::onChangeText
+        )
+        Button(onClick = firstScreenComponent::onIncrease) {
             Text(text = "+")
         }
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        Button(onClick = FirstScreenComponent::onDecrease) {
+        Button(onClick = firstScreenComponent::onDecrease) {
             Text(text = "-")
         }
+       /* Button(onClick = {firstScreenComponent.onNextScreen(state.text)}) {
+            Text(text = "onNext")
+        }*/
+        Button(onClick = firstScreenComponent::onShowAlertClick) {
+            Text("ShowAlert")
+        }
 
-        Spacer(modifier = Modifier.weight(1F))
+        if (state.showAlert) {
+            AlertDialog(
+                onDismissRequest = firstScreenComponent::onCloseAlertClick,
+                title = { Text("Some alert title") },
+                text = { Text("Some alert text") },
+                confirmButton = {
+                    TextButton(onClick = firstScreenComponent::onCloseAlertClick) {
+                        Text("Do nothing")
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = firstScreenComponent::onCloseAlertClick) {
+                        Text("close it")
+                    }
+                },
+            )
+        }
     }
 }
