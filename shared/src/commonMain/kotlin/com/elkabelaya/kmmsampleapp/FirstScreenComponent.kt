@@ -3,7 +3,7 @@ package com.elkabelaya.kmmsampleapp
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
-import com.arkivanov.decompose.value.reduce
+import com.arkivanov.decompose.value.update
 
 data class FirstScreenState(
     val count: Int,
@@ -30,14 +30,14 @@ class DefaultFirstScreenComponent(
 ) : ComponentContext by componentContext, FirstScreenComponent {
     override var state = MutableValue(FirstScreenState(0, "", showAlert = false))
     override fun onIncrease() {
-        state.reduce { it.copy(count = it.count + 1) }
+        state.update { it.copy(count = it.count + 1) }
     }
     override fun onDecrease() {
-        state.reduce { it.copy(count = it.count - 1) }
+        state.update { it.copy(count = it.count - 1) }
     }
 
     override fun onChangeText(value: String): Unit {
-        state.reduce { it.copy(text = value) }
+        state.update { it.copy(text = value) }
     }
 
     override fun onNextScreen(value: String) {
@@ -45,10 +45,10 @@ class DefaultFirstScreenComponent(
     }
 
     override fun onShowAlertClick() {
-        state.reduce { it.copy(showAlert = true) }
+        state.update { it.copy(showAlert = true) }
     }
 
     override fun onCloseAlertClick() {
-        state.reduce { it.copy(showAlert = false) }
+        state.update { it.copy(showAlert = false) }
     }
 }

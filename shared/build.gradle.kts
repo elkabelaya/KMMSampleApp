@@ -1,11 +1,19 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-    id ("kotlin-parcelize")
+    id("kotlin-parcelize")
 }
 
 kotlin {
-    android()
+    targetHierarchy.default()
+
+    android {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = "1.8"
+            }
+        }
+    }
     
     listOf(
         iosX64(),
@@ -14,7 +22,8 @@ kotlin {
     ).forEach {
         it.binaries.framework {
             baseName = "shared"
-            export("com.arkivanov.decompose:decompose:1.0.0-alpha-07")
+            export("com.arkivanov.decompose:decompose:2.0.1")
+            export("com.arkivanov.essenty:lifecycle:1.1.0")
 
         }
     }
@@ -22,7 +31,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api("com.arkivanov.decompose:decompose:1.0.0-alpha-07")
+                api("com.arkivanov.decompose:decompose:2.0.1")
+                api("com.arkivanov.essenty:lifecycle:1.1.0")
                 //implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
             }
         }
@@ -30,26 +40,6 @@ kotlin {
             dependencies {
                 implementation(kotlin("test"))
             }
-        }
-        val androidMain by getting
-        val androidTest by getting
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by creating {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
-        }
-        val iosX64Test by getting
-        val iosArm64Test by getting
-        val iosSimulatorArm64Test by getting
-        val iosTest by creating {
-            dependsOn(commonTest)
-            iosX64Test.dependsOn(this)
-            iosArm64Test.dependsOn(this)
-            iosSimulatorArm64Test.dependsOn(this)
         }
     }
 }

@@ -29,7 +29,7 @@ interface AppFlowComponent {
     }
 }
 
-class RealAppFlowComponent(
+class DefaultAppFlowComponent(
     componentContext: ComponentContext
 ) : ComponentContext by componentContext, AppFlowComponent {
     private val navigation = StackNavigation<ChildConfig>()
@@ -51,7 +51,7 @@ class RealAppFlowComponent(
         is ChildConfig.FirstScreen -> {
             AppFlowComponent.Child.FirstScreen(
                 DefaultFirstScreenComponent(componentContext,
-                    RealFirstScreenRouter(navigation = navigation))
+                    DefaultFirstScreenRouter(navigation = navigation))
             )
         }
 
@@ -67,7 +67,7 @@ class RealAppFlowComponent(
     }
 }
 
-private class RealFirstScreenRouter(val navigation: StackNavigation<ChildConfig>): FirstScreenRouter {
+private class DefaultFirstScreenRouter(val navigation: StackNavigation<ChildConfig>): FirstScreenRouter {
     override fun pushSecondScreen(value: String) {
         navigation.push(ChildConfig.SecondScreen(value))
     }

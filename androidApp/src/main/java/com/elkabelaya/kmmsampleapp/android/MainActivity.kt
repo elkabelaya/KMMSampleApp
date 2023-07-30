@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.arkivanov.decompose.defaultComponentContext
 import com.elkabelaya.kmmsampleapp.DefaultFirstScreenComponent
-import com.elkabelaya.kmmsampleapp.RealAppFlowComponent
+import com.elkabelaya.kmmsampleapp.DefaultAppFlowComponent
 
 @Composable
 fun MyApplicationTheme(
@@ -61,9 +61,8 @@ fun MyApplicationTheme(
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val a = ComponentContextExtKt.
         val componentContext = defaultComponentContext()
-        val appFlowComponent = RealAppFlowComponent(componentContext = componentContext)
+        val appFlowComponent = DefaultAppFlowComponent(componentContext = componentContext)
 
         setContent {
             MyApplicationTheme {

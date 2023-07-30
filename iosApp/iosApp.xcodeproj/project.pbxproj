@@ -14,6 +14,7 @@
 		B308AE8DBF4CB41D635DB16B /* ObservedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B308AB43AF207515E8997BF1 /* ObservedValue.swift */; };
 		CE7FADF72A7570E300788125 /* AppFlowUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FADF62A7570E300788125 /* AppFlowUI.swift */; };
 		CE7FADF92A763B4800788125 /* SecondScreenUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FADF82A763B4800788125 /* SecondScreenUI.swift */; };
+		CE7FADFD2A76518A00788125 /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FADFC2A76518A00788125 /* StackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,6 +40,7 @@
 		B308AB43AF207515E8997BF1 /* ObservedValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservedValue.swift; sourceTree = "<group>"; };
 		CE7FADF62A7570E300788125 /* AppFlowUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowUI.swift; sourceTree = "<group>"; };
 		CE7FADF82A763B4800788125 /* SecondScreenUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondScreenUI.swift; sourceTree = "<group>"; };
+		CE7FADFC2A76518A00788125 /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				B308AB43AF207515E8997BF1 /* ObservedValue.swift */,
 				CE7FADF62A7570E300788125 /* AppFlowUI.swift */,
 				CE7FADF82A763B4800788125 /* SecondScreenUI.swift */,
+				CE7FADFC2A76518A00788125 /* StackView.swift */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 				7555FF83242A565900829871 /* FirstScreenUI.swift in Sources */,
 				B308AE8DBF4CB41D635DB16B /* ObservedValue.swift in Sources */,
 				CE7FADF92A763B4800788125 /* SecondScreenUI.swift in Sources */,
+				CE7FADFD2A76518A00788125 /* StackView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
