@@ -5,6 +5,7 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
+import com.arkivanov.decompose.router.stack.popTo
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
@@ -22,7 +23,7 @@ private sealed interface ChildConfig : Parcelable {
 
 interface AppFlowComponent {
     val childStack: Value<ChildStack<*, Child>>
-
+    fun onBackClicked(toIndex: Int)
     sealed interface Child {
         class FirstScreen(val component: FirstScreenComponent) : Child
         class SecondScreen(val component: SecondScreenComponent) : Child
@@ -43,6 +44,9 @@ class DefaultAppFlowComponent(
 
     override val childStack: Value<ChildStack<*, AppFlowComponent.Child>> = _childStack
 
+    override fun onBackClicked(toIndex: Int) {
+        navigation.popTo(index = toIndex, onComplete = {})
+    }
     private fun createChild(
         config: ChildConfig,
         componentContext: ComponentContext

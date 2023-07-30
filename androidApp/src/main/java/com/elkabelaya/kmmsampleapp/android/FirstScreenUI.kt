@@ -1,6 +1,9 @@
 package com.elkabelaya.kmmsampleapp.android
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -16,8 +19,12 @@ fun FirstScreenUI(firstScreenComponent: FirstScreenComponent) {
     val state by firstScreenComponent.state.subscribeAsState()
 
     Column(
+        verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding()
+        modifier =  Modifier
+            .padding()
+            .fillMaxWidth()
+            .fillMaxHeight()
     ) {
         Text(text = "${state.count}")
         TextField(value = state.text,

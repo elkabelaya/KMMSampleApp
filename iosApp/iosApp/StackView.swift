@@ -5,14 +5,24 @@
 //  Created by user on 30.07.2023.
 //  Copyright © 2023 orgName. All rights reserved.
 //
-/*
 import SwiftUI
 import UIKit
 import shared
 
+@propertyWrapper struct StateValue<T : AnyObject>: DynamicProperty {
+     @ObservedObject
+     private var obj: ObservableValue<T>
+
+     var wrappedValue: T { obj.value }
+
+     init(_ value: Value<T>) {
+         obj = ObservableValue(value)
+     }
+ }
+
 struct StackView<T: AnyObject, Content: View>: View {
-    @ObservedObject
-    private var stackValue: ObservableValue<ChildStack<AnyObject, T>>
+    @StateValue
+    var stackValue: ChildStack<AnyObject, T>
 
     var getTitle: (T) -> String
     var onBack: (_ toIndex: Int32) -> Void
@@ -20,7 +30,7 @@ struct StackView<T: AnyObject, Content: View>: View {
     @ViewBuilder
     var childContent: (T) -> Content
 
-    private var stack: [Child<AnyObject, T>] { stackValue.value }
+    private var stack: [Child<AnyObject, T>] { stackValue.items }
 
     var body: some View {
         // iOS 16.0 has an issue with swipe back see https://stackoverflow.com/questions/73978107/incomplete-swipe-back-gesture-causes-navigationpath-mismanagement
@@ -140,4 +150,3 @@ private extension View {
     }
 }
 #endif
-*/
