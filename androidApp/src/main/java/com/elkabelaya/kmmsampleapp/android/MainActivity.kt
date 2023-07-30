@@ -15,7 +15,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.arkivanov.decompose.defaultComponentContext
 import com.elkabelaya.kmmsampleapp.DefaultFirstScreenComponent
+import com.elkabelaya.kmmsampleapp.RealAppFlowComponent
 
 @Composable
 fun MyApplicationTheme(
@@ -59,8 +61,9 @@ fun MyApplicationTheme(
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val FirstScreenComponent = DefaultFirstScreenComponent()
+        val a = ComponentContextExtKt.
+        val componentContext = defaultComponentContext()
+        val appFlowComponent = RealAppFlowComponent(componentContext = componentContext)
 
         setContent {
             MyApplicationTheme {
@@ -68,7 +71,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    FirstScreenUI(FirstScreenComponent)
+                    AppFlowUI(appFlowComponent)
                 }
             }
         }

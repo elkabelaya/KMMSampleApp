@@ -1,5 +1,6 @@
 package com.elkabelaya.kmmsampleapp
 
+import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.decompose.value.reduce
@@ -15,12 +16,18 @@ interface FirstScreenComponent {
     fun onIncrease()
     fun onDecrease()
     fun onChangeText(value: String)
-   /* fun onNextScreen(value: String)*/
+    fun onNextScreen(value: String)
     fun onShowAlertClick()
     fun onCloseAlertClick()
 }
 
-class DefaultFirstScreenComponent: FirstScreenComponent {
+interface FirstScreenRouter {
+    fun pushSecondScreen(value: String)
+}
+class DefaultFirstScreenComponent(
+    componentContext: ComponentContext,
+    val firstScreenRouter: FirstScreenRouter
+) : ComponentContext by componentContext, FirstScreenComponent {
     override var state = MutableValue(FirstScreenState(0, "", showAlert = false))
     override fun onIncrease() {
         state.reduce { it.copy(count = it.count + 1) }
@@ -33,9 +40,9 @@ class DefaultFirstScreenComponent: FirstScreenComponent {
         state.reduce { it.copy(text = value) }
     }
 
-   /* override fun onNextScreen(value: String) {
-        counterRouter.pushSecondScreen(value)
-    }*/
+    override fun onNextScreen(value: String) {
+        firstScreenRouter.pushSecondScreen(value)
+    }
 
     override fun onShowAlertClick() {
         state.reduce { it.copy(showAlert = true) }

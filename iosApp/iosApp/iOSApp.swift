@@ -1,13 +1,29 @@
 import SwiftUI
 import shared
 
+class LifecycleLifecycleTemp: LifecycleLifecycle {
+    func subscribe(callbacks: LifecycleLifecycleCallbacks) {
+        //
+    }
+
+    func unsubscribe(callbacks: LifecycleLifecycleCallbacks) {
+        //
+    }
+
+    var state: LifecycleLifecycleState = .created
+}
+
 @main
 struct iOSApp: App {
-	var FirstScreenComponent = DefaultFirstScreenComponent()
+	var appFlowComponent = RealAppFlowComponent(
+        componentContext: DefaultComponentContext(
+            lifecycle: LifecycleLifecycleTemp()
+        )
+    )
 
 	var body: some Scene {
 		WindowGroup {
-			FirstScreenView(FirstScreenComponent)
+			AppFlowUI(appFlowComponent)
 		}
 	}
 }

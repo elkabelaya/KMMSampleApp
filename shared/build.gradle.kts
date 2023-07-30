@@ -1,6 +1,7 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id ("kotlin-parcelize")
 }
 
 kotlin {
@@ -14,6 +15,7 @@ kotlin {
         it.binaries.framework {
             baseName = "shared"
             export("com.arkivanov.decompose:decompose:1.0.0-alpha-07")
+
         }
     }
 
@@ -21,6 +23,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api("com.arkivanov.decompose:decompose:1.0.0-alpha-07")
+                //implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
             }
         }
         val commonTest by getting {

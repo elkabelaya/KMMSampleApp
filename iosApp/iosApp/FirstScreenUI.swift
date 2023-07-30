@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-struct FirstScreenView: View {
+struct FirstScreenUI: View {
    private let component: FirstScreenComponent
 
    @ObservedObject
@@ -13,7 +13,7 @@ struct FirstScreenView: View {
    }
 
    var body: some View {
-       VStack {
+       VStack(spacing: 16) {
            HStack {
                Text("\(state.value.count)")
                Button(action: { component.onIncrease() }) {
@@ -31,6 +31,10 @@ struct FirstScreenView: View {
            .border(.black, width: 2)
            Button(action: { component.onShowAlertClick() }) {
                Text("show Alert")
+           }
+
+           Button(action: { component.onNextScreen(value: "\(state.value.count)") }) {
+               Text("go next")
            }
         }
         .padding(.horizontal, 16)
