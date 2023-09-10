@@ -12,9 +12,21 @@ struct FirstScreenUI: View {
        state = ObservableValue<FirstScreenState>(component.state)
    }
 
+    func getCounterText(quantity: Int32) -> String {
+        let counter =  MR.plurals().counter_plural.format(number: quantity, args_: [quantity])
+        return MR.strings().first_screen_current_count.format(args_: [counter]).localized()
+    }
+
    var body: some View {
        VStack(spacing: 16) {
-           Text("\(MR.strings().first_screen_title.value())")
+           Image(\.frog)
+               .resizable()
+               .scaledToFit()
+               .frame(width: 100, height: 100)
+           Text(String(\.first_screen_title))
+               .font(MR.fontsMikar().mikar.font(14))
+               .foregroundColor(Color(\.title_color))
+           Text(getCounterText(quantity: state.value.count))
            HStack {
                Text("\(state.value.count)")
                Button(action: { component.onIncrease() }) {
