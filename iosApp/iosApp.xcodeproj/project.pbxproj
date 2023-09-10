@@ -15,6 +15,7 @@
 		CE7FADF72A7570E300788125 /* AppFlowUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FADF62A7570E300788125 /* AppFlowUI.swift */; };
 		CE7FADF92A763B4800788125 /* SecondScreenUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FADF82A763B4800788125 /* SecondScreenUI.swift */; };
 		CE7FADFD2A76518A00788125 /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FADFC2A76518A00788125 /* StackView.swift */; };
+		CE8B16922AADB47200D0DBF6 /* StringResourceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B16912AADB47200D0DBF6 /* StringResourceExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +42,7 @@
 		CE7FADF62A7570E300788125 /* AppFlowUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowUI.swift; sourceTree = "<group>"; };
 		CE7FADF82A763B4800788125 /* SecondScreenUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondScreenUI.swift; sourceTree = "<group>"; };
 		CE7FADFC2A76518A00788125 /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
+		CE8B16912AADB47200D0DBF6 /* StringResourceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringResourceExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				CE8B16902AADB45800D0DBF6 /* SharedExtensions */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* FirstScreenUI.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
@@ -102,6 +105,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CE8B16902AADB45800D0DBF6 /* SharedExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				CE8B16912AADB47200D0DBF6 /* StringResourceExtensions.swift */,
+			);
+			path = SharedExtensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -109,7 +120,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "iosApp" */;
 			buildPhases = (
-				7555FFB5242A651A00829871 /* ShellScript */,
+				7555FFB5242A651A00829871 /* Build Shared */,
 				7555FF77242A565900829871 /* Sources */,
 				7555FF78242A565900829871 /* Frameworks */,
 				7555FF79242A565900829871 /* Resources */,
@@ -170,7 +181,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7555FFB5242A651A00829871 /* ShellScript */ = {
+		7555FFB5242A651A00829871 /* Build Shared */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -179,6 +190,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Build Shared";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -194,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE8B16922AADB47200D0DBF6 /* StringResourceExtensions.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				CE7FADF72A7570E300788125 /* AppFlowUI.swift in Sources */,
 				7555FF83242A565900829871 /* FirstScreenUI.swift in Sources */,
@@ -331,6 +344,7 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				INFOPLIST_FILE = iosApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -356,6 +370,7 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				INFOPLIST_FILE = iosApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -14,6 +14,7 @@ struct FirstScreenUI: View {
 
    var body: some View {
        VStack(spacing: 16) {
+           Text("\(MR.strings().first_screen_title.value())")
            HStack {
                Text("\(state.value.count)")
                Button(action: { component.onIncrease() }) {

@@ -1,3 +1,4 @@
+
 plugins {
     //trick: for the same plugin versions in all sub-modules
     id("com.android.application").version("8.1.0").apply(false)
@@ -8,4 +9,23 @@ plugins {
 
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
+}
+
+buildscript {
+    repositories {
+        gradlePluginPortal()
+        google()
+    }
+
+    dependencies {
+        classpath("dev.icerock.moko:resources-generator:0.23.0")
+    }
+}
+
+
+allprojects {
+    repositories {
+        mavenCentral()
+        google()
+    }
 }

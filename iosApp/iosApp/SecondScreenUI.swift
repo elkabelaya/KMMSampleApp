@@ -24,5 +24,11 @@ struct SecondScreenUI: View {
         Button(action: { component.onBackClick() }) {
             Text("go back")
         }
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Image(systemName: "photo.fill")
+                    .foregroundColor(.green)
+            }
+        }
     }
 }

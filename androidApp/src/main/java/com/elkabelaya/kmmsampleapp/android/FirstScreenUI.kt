@@ -10,8 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import com.elkabelaya.kmmsampleapp.FirstScreenComponent
+import com.elkabelaya.kmmsampleapp.MR.MR
 
 
 @Composable
@@ -26,6 +28,7 @@ fun FirstScreenUI(firstScreenComponent: FirstScreenComponent) {
             .fillMaxWidth()
             .fillMaxHeight()
     ) {
+        Text(stringResource(id = MR.strings.first_screen_title.resourceId))
         Text(text = "${state.count}")
         TextField(value = state.text,
             onValueChange = firstScreenComponent::onChangeText

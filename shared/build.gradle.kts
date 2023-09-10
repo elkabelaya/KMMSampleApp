@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("kotlin-parcelize")
+    id("dev.icerock.mobile.multiplatform-resources")
 }
 
 kotlin {
@@ -24,7 +25,8 @@ kotlin {
             baseName = "shared"
             export("com.arkivanov.decompose:decompose:2.0.1")
             export("com.arkivanov.essenty:lifecycle:1.1.0")
-
+            export("dev.icerock.moko:resources:0.23.0")
+            export("dev.icerock.moko:graphics:0.9.0") // toUIColor here
         }
     }
 
@@ -51,4 +53,13 @@ android {
         minSdk = 24
         targetSdk = 33
     }
+}
+
+dependencies {
+    commonMainApi("dev.icerock.moko:resources:0.23.0")
+    commonTestImplementation("dev.icerock.moko:resources-test:0.23.0")
+}
+
+multiplatformResources {
+    multiplatformResourcesPackage = "com.elkabelaya.kmmsampleapp.MR" // required
 }
