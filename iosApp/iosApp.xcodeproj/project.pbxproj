@@ -12,7 +12,7 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* FirstScreenUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* FirstScreenUI.swift */; };
 		B308AE8DBF4CB41D635DB16B /* ObservedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B308AB43AF207515E8997BF1 /* ObservedValue.swift */; };
-		CE7FADF72A7570E300788125 /* AppFlowUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FADF62A7570E300788125 /* AppFlowUI.swift */; };
+		CE7FADF72A7570E300788125 /* FirstTabFlowUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FADF62A7570E300788125 /* FirstTabFlowUI.swift */; };
 		CE7FADF92A763B4800788125 /* SecondScreenUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FADF82A763B4800788125 /* SecondScreenUI.swift */; };
 		CE7FADFD2A76518A00788125 /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FADFC2A76518A00788125 /* StackView.swift */; };
 		CE8B16922AADB47200D0DBF6 /* StringResourceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B16912AADB47200D0DBF6 /* StringResourceExtensions.swift */; };
@@ -43,7 +43,7 @@
 		7555FF82242A565900829871 /* FirstScreenUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstScreenUI.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B308AB43AF207515E8997BF1 /* ObservedValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservedValue.swift; sourceTree = "<group>"; };
-		CE7FADF62A7570E300788125 /* AppFlowUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowUI.swift; sourceTree = "<group>"; };
+		CE7FADF62A7570E300788125 /* FirstTabFlowUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTabFlowUI.swift; sourceTree = "<group>"; };
 		CE7FADF82A763B4800788125 /* SecondScreenUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondScreenUI.swift; sourceTree = "<group>"; };
 		CE7FADFC2A76518A00788125 /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 		CE8B16912AADB47200D0DBF6 /* StringResourceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringResourceExtensions.swift; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 				B308AB43AF207515E8997BF1 /* ObservedValue.swift */,
-				CE7FADF62A7570E300788125 /* AppFlowUI.swift */,
+				CE7FADF62A7570E300788125 /* FirstTabFlowUI.swift */,
 				CE7FADF82A763B4800788125 /* SecondScreenUI.swift */,
 				CE7FADFC2A76518A00788125 /* StackView.swift */,
 				CEA50BE12AB0B33A00D16F07 /* TabUI.swift */,
@@ -230,7 +230,7 @@
 				CE8B16922AADB47200D0DBF6 /* StringResourceExtensions.swift in Sources */,
 				CEA50BE22AB0B33A00D16F07 /* TabUI.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
-				CE7FADF72A7570E300788125 /* AppFlowUI.swift in Sources */,
+				CE7FADF72A7570E300788125 /* FirstTabFlowUI.swift in Sources */,
 				CE8B16942AADC77D00D0DBF6 /* ImageResourceExtensions.swift in Sources */,
 				7555FF83242A565900829871 /* FirstScreenUI.swift in Sources */,
 				B308AE8DBF4CB41D635DB16B /* ObservedValue.swift in Sources */,

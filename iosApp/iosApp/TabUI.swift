@@ -70,7 +70,7 @@ private struct ChildView: View {
     var body: some View {
         switch child {
         case let child as TabComponentChild.FirstTab:
-            AppFlowUI(child.component)
+            FirstTabFlowUI(child.component)
         case let child as TabComponentChild.SecondTab:
             FirstScreenUI(child.component)
         default:

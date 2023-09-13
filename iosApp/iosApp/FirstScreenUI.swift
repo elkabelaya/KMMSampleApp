@@ -3,7 +3,8 @@ import shared
 
 struct FirstScreenUI: View {
    private let component: FirstScreenComponent
-
+   @State var isPresented: Bool = false
+   @State var isBSPresented: Bool = false
    @ObservedObject
    private var state: ObservableValue<FirstScreenState>
 
@@ -45,6 +46,9 @@ struct FirstScreenUI: View {
            Button(action: { component.onNextScreen(value: "\(state.value.count)") }) {
                Text("go next")
            }
+           Button(action: { isBSPresented = true }) {
+               Text("sheet")
+           }
         }
         .padding(.horizontal, 16)
         .toolbar{
@@ -70,5 +74,20 @@ struct FirstScreenUI: View {
                     })
               )
           }
+        .sheet(isPresented: $isBSPresented) {
+            NavigationView {
+                Text("sheet")
+                    .onTapGesture {
+                        isPresented = true
+                    }
+                    .fullScreenCover(isPresented: $isPresented) {
+                        Text("fullScreenCover")
+                            .onTapGesture {
+                                isPresented = false
+                            }
+                    }
+            }
+        }
+
     }
 }

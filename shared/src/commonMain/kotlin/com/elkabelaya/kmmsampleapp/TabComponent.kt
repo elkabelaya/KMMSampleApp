@@ -36,7 +36,7 @@ interface TabComponent {
     fun onTabClicked(index: Int)
 
     sealed class Child(val index: Int) {
-        class FirstTab(val component: AppFlowComponent) : Child(index = 0)
+        class FirstTab(val component: FirstTabFlowComponent) : Child(index = 0)
         class SecondTab(val component: FirstScreenComponent) : Child(index = 1)
     }
 }
@@ -68,7 +68,7 @@ class DefaultTabComponent(
 
         is TabChildConfig.FirstTab -> {
             TabComponent.Child.FirstTab(
-                DefaultAppFlowComponent(componentContext = componentContext)
+                DefaultFirstTabFlowComponent(componentContext = componentContext)
             )
         }
 

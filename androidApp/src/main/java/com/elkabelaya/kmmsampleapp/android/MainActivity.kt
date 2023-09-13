@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.arkivanov.decompose.defaultComponentContext
 import com.elkabelaya.kmmsampleapp.DefaultFirstScreenComponent
-import com.elkabelaya.kmmsampleapp.DefaultAppFlowComponent
+import com.elkabelaya.kmmsampleapp.DefaultFirstTabFlowComponent
 import com.elkabelaya.kmmsampleapp.DefaultTabComponent
 
 @Composable

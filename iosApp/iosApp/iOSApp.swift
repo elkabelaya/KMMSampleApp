@@ -10,16 +10,16 @@ struct iOSApp: App {
     @Environment(\.scenePhase)
     var scenePhase: ScenePhase
 
-    private var appFlowHolder: AppFlowHolder { appDelegate.appFlowHolder }
+    private var FirstTabFlowHolder: FirstTabFlowHolder { appDelegate.FirstTabFlowHolder }
 
 	var body: some Scene {
 		WindowGroup {
-            TabUI(appFlowHolder.appFlow)
+            TabUI(FirstTabFlowHolder.FirstTabFlow)
             .onChange(of: scenePhase) { newPhase in
                 switch newPhase {
-                case .background: LifecycleRegistryExtKt.stop(appFlowHolder.lifecycle)
-                case .inactive: LifecycleRegistryExtKt.pause(appFlowHolder.lifecycle)
-                case .active: LifecycleRegistryExtKt.resume(appFlowHolder.lifecycle)
+                case .background: LifecycleRegistryExtKt.stop(FirstTabFlowHolder.lifecycle)
+                case .inactive: LifecycleRegistryExtKt.pause(FirstTabFlowHolder.lifecycle)
+                case .active: LifecycleRegistryExtKt.resume(FirstTabFlowHolder.lifecycle)
                 @unknown default: break
                 }
             }
@@ -28,17 +28,17 @@ struct iOSApp: App {
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-    fileprivate var appFlowHolder: AppFlowHolder = .init()
+    fileprivate var FirstTabFlowHolder: FirstTabFlowHolder = .init()
 }
 
-private class AppFlowHolder: ObservableObject {
+private class FirstTabFlowHolder: ObservableObject {
     let lifecycle: LifecycleRegistry
-    let appFlow: TabComponent
+    let FirstTabFlow: TabComponent
 
     init() {
         lifecycle = LifecycleRegistryKt.LifecycleRegistry()
 
-        appFlow = DefaultTabComponent(
+        FirstTabFlow = DefaultTabComponent(
             componentContext: DefaultComponentContext(lifecycle: lifecycle)
         )
 

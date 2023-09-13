@@ -1,5 +1,5 @@
 //
-//  AppFlowUI.swift
+//  FirstTabFlowUI.swift
 //  iosApp
 //
 //  Created by user on 29.07.2023.
@@ -9,10 +9,10 @@
 import SwiftUI
 import shared
 
-struct AppFlowUI: View {
-    let component: AppFlowComponent
+struct FirstTabFlowUI: View {
+    let component: FirstTabFlowComponent
 
-    init(_ component: AppFlowComponent) {
+    init(_ component: FirstTabFlowComponent) {
         self.component = component
     }
 
@@ -23,9 +23,9 @@ struct AppFlowUI: View {
             onBack: component.onBackClicked,
             childContent: {
                 switch $0 {
-                case let first as AppFlowComponentChildFirstScreen:
+                case let first as FirstTabFlowComponentChildFirstScreen:
                     FirstScreenUI(first.component)
-                case let second as AppFlowComponentChildSecondScreen:
+                case let second as FirstTabFlowComponentChildSecondScreen:
                     SecondScreenUI(second.component)
                 default:
                     EmptyView()

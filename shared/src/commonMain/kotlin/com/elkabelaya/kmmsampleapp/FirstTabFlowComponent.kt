@@ -7,21 +7,20 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.popTo
 import com.arkivanov.decompose.router.stack.push
-import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
 
-private sealed interface AppFlowChildConfig : Parcelable {
+private sealed interface FirstTabFlowChildConfig : Parcelable {
 
     @Parcelize
-    object FirstScreen: AppFlowChildConfig
+    object FirstScreen: FirstTabFlowChildConfig
 
     @Parcelize
-    data class SecondScreen(val value: String): AppFlowChildConfig
+    data class SecondScreen(val value: String): FirstTabFlowChildConfig
 }
 
-interface AppFlowComponent {
+interface FirstTabFlowComponent {
     val childStack: Value<ChildStack<*, Child>>
     fun onBackClicked(toIndex: Int)
     sealed interface Child {
@@ -30,37 +29,37 @@ interface AppFlowComponent {
     }
 }
 
-class DefaultAppFlowComponent(
+class DefaultFirstTabFlowComponent(
     componentContext: ComponentContext
-) : ComponentContext by componentContext, AppFlowComponent {
-    private val navigation = StackNavigation<AppFlowChildConfig>()
+) : ComponentContext by componentContext, FirstTabFlowComponent {
+    private val navigation = StackNavigation<FirstTabFlowChildConfig>()
     private val _childStack =
         childStack(
             source = navigation,
-            initialConfiguration = AppFlowChildConfig.FirstScreen,
+            initialConfiguration = FirstTabFlowChildConfig.FirstScreen,
             handleBackButton = true, // Pop the back stack on back button press
             childFactory = ::createChild,
         )
 
-    override val childStack: Value<ChildStack<*, AppFlowComponent.Child>> = _childStack
+    override val childStack: Value<ChildStack<*, FirstTabFlowComponent.Child>> = _childStack
 
     override fun onBackClicked(toIndex: Int) {
         navigation.popTo(index = toIndex, onComplete = {})
     }
     private fun createChild(
-        config: AppFlowChildConfig,
+        config: FirstTabFlowChildConfig,
         componentContext: ComponentContext
-    ): AppFlowComponent.Child = when (config) {
+    ): FirstTabFlowComponent.Child = when (config) {
 
-        is AppFlowChildConfig.FirstScreen -> {
-            AppFlowComponent.Child.FirstScreen(
+        is FirstTabFlowChildConfig.FirstScreen -> {
+            FirstTabFlowComponent.Child.FirstScreen(
                 DefaultFirstScreenComponent(componentContext,
                     DefaultFirstScreenRouter(navigation = navigation))
             )
         }
 
-        is AppFlowChildConfig.SecondScreen -> {
-            AppFlowComponent.Child.SecondScreen(
+        is FirstTabFlowChildConfig.SecondScreen -> {
+            FirstTabFlowComponent.Child.SecondScreen(
                 DefaultSecondScreenComponent(componentContext,
                     initialValue = config.value,
                     dismiss = {
@@ -71,9 +70,9 @@ class DefaultAppFlowComponent(
     }
 }
 
-private class DefaultFirstScreenRouter(val navigation: StackNavigation<AppFlowChildConfig>): FirstScreenRouter {
+private class DefaultFirstScreenRouter(val navigation: StackNavigation<FirstTabFlowChildConfig>): FirstScreenRouter {
     override fun pushSecondScreen(value: String) {
-        navigation.push(AppFlowChildConfig.SecondScreen(value))
+        navigation.push(FirstTabFlowChildConfig.SecondScreen(value))
     }
 
 }

@@ -47,7 +47,7 @@ fun TabUI(component: TabComponent) {
                 ) {
                         when (val child = it.instance) {
                                 is TabComponent.Child.FirstTab ->
-                                        AppFlowUI(component = child.component)
+                                        FirstTabFlowUI(component = child.component)
 
                                 is TabComponent.Child.SecondTab ->
                                         FirstScreenUI(firstScreenComponent = child.component)
