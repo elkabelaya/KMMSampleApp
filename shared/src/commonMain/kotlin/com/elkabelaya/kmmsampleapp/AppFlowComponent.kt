@@ -12,13 +12,13 @@ import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
 
-private sealed interface ChildConfig : Parcelable {
+private sealed interface AppFlowChildConfig : Parcelable {
 
     @Parcelize
-    object FirstScreen: ChildConfig
+    object FirstScreen: AppFlowChildConfig
 
     @Parcelize
-    data class SecondScreen(val value: String): ChildConfig
+    data class SecondScreen(val value: String): AppFlowChildConfig
 }
 
 interface AppFlowComponent {
@@ -33,11 +33,11 @@ interface AppFlowComponent {
 class DefaultAppFlowComponent(
     componentContext: ComponentContext
 ) : ComponentContext by componentContext, AppFlowComponent {
-    private val navigation = StackNavigation<ChildConfig>()
+    private val navigation = StackNavigation<AppFlowChildConfig>()
     private val _childStack =
         childStack(
             source = navigation,
-            initialConfiguration = ChildConfig.FirstScreen,
+            initialConfiguration = AppFlowChildConfig.FirstScreen,
             handleBackButton = true, // Pop the back stack on back button press
             childFactory = ::createChild,
         )
@@ -48,18 +48,18 @@ class DefaultAppFlowComponent(
         navigation.popTo(index = toIndex, onComplete = {})
     }
     private fun createChild(
-        config: ChildConfig,
+        config: AppFlowChildConfig,
         componentContext: ComponentContext
     ): AppFlowComponent.Child = when (config) {
 
-        is ChildConfig.FirstScreen -> {
+        is AppFlowChildConfig.FirstScreen -> {
             AppFlowComponent.Child.FirstScreen(
                 DefaultFirstScreenComponent(componentContext,
                     DefaultFirstScreenRouter(navigation = navigation))
             )
         }
 
-        is ChildConfig.SecondScreen -> {
+        is AppFlowChildConfig.SecondScreen -> {
             AppFlowComponent.Child.SecondScreen(
                 DefaultSecondScreenComponent(componentContext,
                     initialValue = config.value,
@@ -71,9 +71,9 @@ class DefaultAppFlowComponent(
     }
 }
 
-private class DefaultFirstScreenRouter(val navigation: StackNavigation<ChildConfig>): FirstScreenRouter {
+private class DefaultFirstScreenRouter(val navigation: StackNavigation<AppFlowChildConfig>): FirstScreenRouter {
     override fun pushSecondScreen(value: String) {
-        navigation.push(ChildConfig.SecondScreen(value))
+        navigation.push(AppFlowChildConfig.SecondScreen(value))
     }
 
 }

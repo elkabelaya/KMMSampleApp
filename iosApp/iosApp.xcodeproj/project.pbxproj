@@ -19,6 +19,7 @@
 		CE8B16942AADC77D00D0DBF6 /* ImageResourceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B16932AADC77D00D0DBF6 /* ImageResourceExtensions.swift */; };
 		CE8B16962AADCFFE00D0DBF6 /* FontResourceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B16952AADCFFE00D0DBF6 /* FontResourceExtensions.swift */; };
 		CE8B16992AADDC3700D0DBF6 /* ColorResourceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B16982AADDC3700D0DBF6 /* ColorResourceExtensions.swift */; };
+		CEA50BE22AB0B33A00D16F07 /* TabUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA50BE12AB0B33A00D16F07 /* TabUI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +50,7 @@
 		CE8B16932AADC77D00D0DBF6 /* ImageResourceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResourceExtensions.swift; sourceTree = "<group>"; };
 		CE8B16952AADCFFE00D0DBF6 /* FontResourceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontResourceExtensions.swift; sourceTree = "<group>"; };
 		CE8B16982AADDC3700D0DBF6 /* ColorResourceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorResourceExtensions.swift; sourceTree = "<group>"; };
+		CEA50BE12AB0B33A00D16F07 /* TabUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabUI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				CE7FADF62A7570E300788125 /* AppFlowUI.swift */,
 				CE7FADF82A763B4800788125 /* SecondScreenUI.swift */,
 				CE7FADFC2A76518A00788125 /* StackView.swift */,
+				CEA50BE12AB0B33A00D16F07 /* TabUI.swift */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 			files = (
 				CE8B16962AADCFFE00D0DBF6 /* FontResourceExtensions.swift in Sources */,
 				CE8B16922AADB47200D0DBF6 /* StringResourceExtensions.swift in Sources */,
+				CEA50BE22AB0B33A00D16F07 /* TabUI.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				CE7FADF72A7570E300788125 /* AppFlowUI.swift in Sources */,
 				CE8B16942AADC77D00D0DBF6 /* ImageResourceExtensions.swift in Sources */,

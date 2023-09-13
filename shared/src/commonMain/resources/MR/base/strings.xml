@@ -2,4 +2,8 @@
 <resources>
     <string name="first_screen_title">This is a First Screen</string>
     <string name="first_screen_current_count">Current count is \'%s\'</string>
+
+    <string name="tab_first_title">First</string>
+    <string name="tab_second_title">Second</string>
+
 </resources>

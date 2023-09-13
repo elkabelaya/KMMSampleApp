@@ -2,4 +2,7 @@
 <resources>
     <string name="first_screen_title">"Это первый экран"</string>
     <string name="first_screen_current_count">Текущее значение счетчика: %s</string>
+
+    <string name="tab_first_title">Раз</string>
+    <string name="tab_second_title">Два</string>
 </resources>

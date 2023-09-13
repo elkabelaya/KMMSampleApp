@@ -14,7 +14,7 @@ struct iOSApp: App {
 
 	var body: some Scene {
 		WindowGroup {
-            AppFlowUI(appFlowHolder.appFlow)
+            TabUI(appFlowHolder.appFlow)
             .onChange(of: scenePhase) { newPhase in
                 switch newPhase {
                 case .background: LifecycleRegistryExtKt.stop(appFlowHolder.lifecycle)
@@ -33,12 +33,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 private class AppFlowHolder: ObservableObject {
     let lifecycle: LifecycleRegistry
-    let appFlow: AppFlowComponent
+    let appFlow: TabComponent
 
     init() {
         lifecycle = LifecycleRegistryKt.LifecycleRegistry()
 
-        appFlow = DefaultAppFlowComponent(
+        appFlow = DefaultTabComponent(
             componentContext: DefaultComponentContext(lifecycle: lifecycle)
         )
 

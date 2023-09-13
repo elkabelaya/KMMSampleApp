@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.sp
 import com.arkivanov.decompose.defaultComponentContext
 import com.elkabelaya.kmmsampleapp.DefaultFirstScreenComponent
 import com.elkabelaya.kmmsampleapp.DefaultAppFlowComponent
+import com.elkabelaya.kmmsampleapp.DefaultTabComponent
 
 @Composable
 fun MyApplicationTheme(
@@ -62,7 +63,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val componentContext = defaultComponentContext()
-        val appFlowComponent = DefaultAppFlowComponent(componentContext = componentContext)
+        val tabComponent = DefaultTabComponent(componentContext = componentContext)
 
         setContent {
             MyApplicationTheme {
@@ -70,7 +71,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    AppFlowUI(appFlowComponent)
+                    TabUI(tabComponent)
                 }
             }
         }
