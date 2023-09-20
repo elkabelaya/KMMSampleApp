@@ -39,11 +39,16 @@ struct TabUI: View {
                             }
 
                         }
-
                         .tag(tabConfig.index)
                 }
             }
             .accentColor(.purple)
+            .onAppear() {
+                UITabBar.appearance().tintColor = .purple
+                UITabBar.appearance().unselectedItemTintColor = .darkGray
+                UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: MR.fontsMikar().mikar.uiFont(withSize: 14)], for: .normal)
+                UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: MR.fontsMikar().mikar.uiFont(withSize: 14)], for: .selected)
+            }
         }
     }
 
