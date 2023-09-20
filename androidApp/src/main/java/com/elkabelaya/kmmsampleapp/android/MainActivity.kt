@@ -16,9 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.arkivanov.decompose.defaultComponentContext
-import com.elkabelaya.kmmsampleapp.DefaultFirstScreenComponent
-import com.elkabelaya.kmmsampleapp.DefaultFirstTabFlowComponent
-import com.elkabelaya.kmmsampleapp.DefaultTabComponent
+import com.elkabelaya.kmmsampleapp.tabs.DefaultTabComponent
 
 @Composable
 fun MyApplicationTheme(

@@ -20,7 +20,8 @@ import com.elkabelaya.kmmsampleapp.SecondScreenComponent
 
 
 @Composable
-fun SecondScreenUI(secondScreenComponent: SecondScreenComponent) {
+fun SecondScreenUI(secondScreenComponent: SecondScreenComponent,
+                   onBackClicked: () -> Unit) {
     val state by secondScreenComponent.state.subscribeAsState()
 
     Column(
@@ -31,7 +32,7 @@ fun SecondScreenUI(secondScreenComponent: SecondScreenComponent) {
             .fillMaxHeight()
             .background(Color.Yellow)
     ) {
-        Button(onClick = secondScreenComponent::onBackClick) {
+        Button(onClick = onBackClicked) {
             Text("Go back")
         }
     }

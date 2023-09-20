@@ -14,14 +14,16 @@ struct SecondScreenUI: View {
 
     @ObservedObject
     private var state: ObservableValue<SecondScreenState>
-
-    init(_ component: SecondScreenComponent) {
+    private var onBackClicked: () -> Void
+    init(_ component: SecondScreenComponent,
+         onBackClicked: @escaping () -> Void) {
         self.component = component
         state = ObservableValue<SecondScreenState>(component.state)
+        self.onBackClicked = onBackClicked
     }
 
     var body: some View {
-        Button(action: { component.onBackClick() }) {
+        Button(action: onBackClicked) {
             Text("go back")
         }
         .toolbar {

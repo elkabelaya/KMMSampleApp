@@ -20,40 +20,59 @@ import shared
      }
  }
 
-struct StackView<T: AnyObject, Content: View>: View {
+struct StackView<T: AnyObject, ChildContent: View>: ViewModifier {
     @StateValue
-    var stackValue: ChildStack<AnyObject, T>
+    var stackValue: ChildSlot<AnyObject, T>
 
     var getTitle: (T) -> String
-    var onBack: (_ toIndex: Int32) -> Void
+    var onBack: () -> Void
 
     @ViewBuilder
-    var childContent: (T) -> Content
+    var childContent: (Any?) -> ChildContent
 
-    private var stack: [Child<AnyObject, T>] { stackValue.items }
-
-    var body: some View {
+    //private var stack: [Child<AnyObject, T>] { stackValue.items }
+    private var slot: Child<AnyObject, T>? { stackValue.child }
+    func body(content: Content) -> some View {
         // iOS 16.0 has an issue with swipe back see https://stackoverflow.com/questions/73978107/incomplete-swipe-back-gesture-causes-navigationpath-mismanagement
         if #available(iOS 16.1, *) {
-            NavigationStack(
+            NavigationStack/*(
                 path: Binding(
-                    get: { stack.dropFirst() },
+                    get: {
+                        [slot]
+
+                    },
                     set: { updatedPath in onBack(Int32(updatedPath.count)) }
                 )
-            ) {
-                childContent(stack.first!.instance!)
-                    .navigationDestination(for: Child<AnyObject, T>.self) {
-                        childContent($0.instance!)
-                    }
+                            ) */{
+                                    content
+                                    .background(
+                                        NavigationLink(destination: childContent(stackValue.child?.instance), isActive: Binding(
+                                            get: { self.stackValue.child != nil },
+                                            set: { if !$0 {
+                                                print("\(self.stackValue)")
+                                                onBack()
+                                            }})
+                                        ) {
+                                            EmptyView()
+                                        }
+                                    )
+                                    .onChange(of: stackValue) { _ in
+                                        print("changed \(stackValue)")
+                                    }
+                                    /*.navigationDestination(for: Child<AnyObject, T>.self) {
+                                     childContent($0.instance!)
+                                     }*/
+
             }
-        } else {
+            /*}*/
+        } /*else {
             StackInteropView(
                 components: stack.map { $0.instance! },
                 getTitle: getTitle,
                 onBack: onBack,
                 childContent: childContent
             )
-        }
+        }*/
     }
 }
 

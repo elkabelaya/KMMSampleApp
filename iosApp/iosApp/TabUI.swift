@@ -11,68 +11,73 @@ import shared
 
 struct TabUI: View {
     let component: TabComponent
+    @ObservedObject
+    private var state: ObservableValue<TabState>
 
-    @StateValue
-    private var childStack: ChildStack<AnyObject, TabComponentChild>
-    private var activeChild: TabComponentChild { childStack.active.instance }
     init(_ component: TabComponent) {
         self.component = component
-        _childStack = StateValue(component.childStack)
+        state = ObservableValue<TabState>(component.state)
     }
 
     var body: some View {
         VStack {
-            ChildView(child: activeChild)
-                .frame(maxHeight: .infinity)
+            TabView(selection: Binding(get: { state.value.selectedTab },
+                                       set: {value, _ in
+                component.onTabClicked(index: value)
 
-            HStack(alignment: .bottom, spacing: 16) {
-                Spacer()
-                Button(action: component.onFirstTabClicked) {
-                    Label(title: {
-                            Text(String(\.tab_first_title))
-                         },
-                         icon: {
-                             Image(\.tab_first_icon)
-                                 .resizable()
-                                 .scaledToFit()
-                                 .frame(width: 24, height: 24)
-                         }
-                    )
-                    .labelStyle(VerticalLabelStyle())
-                    .opacity(activeChild is TabComponentChild.FirstTab ? 1 : 0.5)
-                    .font(MR.fontsMikar().mikar.font(14))
+
+            })){
+                ForEach( component.tabs, id:\.self ){tabConfig in
+                    ChildView(child: tabConfig)
+                        .tabItem {
+                            VStack {
+                                /*WTF?
+                                 getImage(child:tabConfig)
+                                 */
+                                Text(getTitle(child:tabConfig))
+
+                            }
+
+                        }
+
+                        .tag(tabConfig.index)
                 }
-                Spacer()
-                Button(action: component.onSecondTabClicked) {
-                    Label(title: {
-                            Text(String(\.tab_second_title))
-                         },
-                         icon: {
-                             Image(\.tab_second_icon)
-                             .resizable()
-                             .scaledToFit()
-                             .frame(width: 24, height: 24)
-                         }
-                    )
-                    .labelStyle(VerticalLabelStyle())
-                    .opacity(activeChild is TabComponentChild.SecondTab ? 1 : 0.5)
-                    .font(MR.fontsMikar().mikar.font(14))
-                }
-                Spacer()
             }
+            .accentColor(.purple)
         }
     }
+
+    func getTitle(child: BaseTabComponentChild) -> String {
+        switch child {
+        case is BaseTabComponentChild.FirstTab:
+            return String(\.tab_first_title)
+        case is BaseTabComponentChild.SecondTab:
+            return String(\.tab_second_title)
+        default:
+            return ""
+        }
+    }
+
+    func getImage(child: BaseTabComponentChild) -> Image {
+        switch child {
+        case is BaseTabComponentChild.FirstTab:
+            return Image(\.frog)
+        default:
+            return Image(\.tab_second_icon)
+        }
+    }
+
 }
 
 private struct ChildView: View {
-    let child: TabComponentChild
+    let child: BaseTabComponentChild
 
     var body: some View {
         switch child {
-        case let child as TabComponentChild.FirstTab:
+        case let child as BaseTabComponentChild.FirstTab:
             FirstTabFlowUI(child.component)
-        case let child as TabComponentChild.SecondTab:
-            FirstScreenUI(child.component)
+        case let child as BaseTabComponentChild.SecondTab:
+            Text("TODO")
         default:
             EmptyView()//недостижимое условие
         }

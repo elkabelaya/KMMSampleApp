@@ -13,6 +13,7 @@ data class FirstScreenState(
 
 interface FirstScreenComponent {
     var state: MutableValue<FirstScreenState>
+
     fun onIncrease()
     fun onDecrease()
     fun onChangeText(value: String)
@@ -20,14 +21,10 @@ interface FirstScreenComponent {
     fun onShowAlertClick()
     fun onCloseAlertClick()
 }
-
-interface FirstScreenRouter {
-    fun pushSecondScreen(value: String)
-}
 class DefaultFirstScreenComponent(
-    componentContext: ComponentContext,
-    val firstScreenRouter: FirstScreenRouter
+    componentContext: ComponentContext
 ) : ComponentContext by componentContext, FirstScreenComponent {
+
     override var state = MutableValue(FirstScreenState(0, "", showAlert = false))
     override fun onIncrease() {
         state.update { it.copy(count = it.count + 1) }
@@ -41,7 +38,7 @@ class DefaultFirstScreenComponent(
     }
 
     override fun onNextScreen(value: String) {
-        firstScreenRouter.pushSecondScreen(value)
+        //firstScreenRouter.pushSecondScreen(value)
     }
 
     override fun onShowAlertClick() {

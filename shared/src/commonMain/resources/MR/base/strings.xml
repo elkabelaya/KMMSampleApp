@@ -6,4 +6,7 @@
     <string name="tab_first_title">First</string>
     <string name="tab_second_title">Second</string>
 
+    <string name="first_tab_button_first_title">Go to first screen</string>
+    <string name="first_tab_button_second_title">Go to second screen</string>
+
 </resources>

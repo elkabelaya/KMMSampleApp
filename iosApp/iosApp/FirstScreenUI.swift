@@ -7,10 +7,13 @@ struct FirstScreenUI: View {
    @State var isBSPresented: Bool = false
    @ObservedObject
    private var state: ObservableValue<FirstScreenState>
+    private var onBackClicked: () -> Void
 
-   init(_ component: FirstScreenComponent) {
+   init(_ component: FirstScreenComponent,
+        onBackClicked: @escaping () -> Void) {
        self.component = component
        state = ObservableValue<FirstScreenState>(component.state)
+       self.onBackClicked = onBackClicked
    }
 
     func getCounterText(quantity: Int32) -> String {
@@ -76,16 +79,23 @@ struct FirstScreenUI: View {
           }
         .sheet(isPresented: $isBSPresented) {
             NavigationView {
-                Text("sheet")
-                    .onTapGesture {
-                        isPresented = true
-                    }
-                    .fullScreenCover(isPresented: $isPresented) {
-                        Text("fullScreenCover")
+                ScrollView {
+                    LazyVStack {
+                        Text("sheet")
                             .onTapGesture {
-                                isPresented = false
+                                isPresented = true
                             }
+                            .fullScreenCover(isPresented: $isPresented) {
+                                Text("fullScreenCover")
+                                    .onTapGesture {
+                                        isPresented = false
+                                    }
+                            }
+                        ForEach(0...100, id:\.self) { index in
+                            Text("\(index)")
+                        }
                     }
+                }
             }
         }
 

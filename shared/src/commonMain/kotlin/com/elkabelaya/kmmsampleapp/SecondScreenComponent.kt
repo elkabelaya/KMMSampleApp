@@ -10,14 +10,11 @@ data class SecondScreenState(
 
 interface SecondScreenComponent {
     val state: Value<SecondScreenState>
-    fun onBackClick()
 }
 
 class DefaultSecondScreenComponent(
     componentContext: ComponentContext,
-    initialValue: String,
-    val dismiss: () -> Unit
+    initialValue: String
 ) : ComponentContext by componentContext, SecondScreenComponent {
     override val state = MutableValue(SecondScreenState(initialValue))
-    override fun onBackClick()  = dismiss()
 }

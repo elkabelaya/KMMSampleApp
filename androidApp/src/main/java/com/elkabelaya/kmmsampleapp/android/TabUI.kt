@@ -6,15 +6,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.Composable;
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
@@ -24,14 +20,14 @@ import androidx.compose.ui.unit.sp
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.Direction
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.StackAnimation
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.StackAnimator
-import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.isEnter
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stackAnimation
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import com.elkabelaya.kmmsampleapp.MR.MR
-import com.elkabelaya.kmmsampleapp.TabComponent;
+import com.elkabelaya.kmmsampleapp.tabs.BaseTabComponent
+import com.elkabelaya.kmmsampleapp.tabs.TabComponent;
 
 @Composable
 fun TabUI(component: TabComponent) {
@@ -40,23 +36,21 @@ fun TabUI(component: TabComponent) {
         val fontFamily: FontFamily = FontFamily(Font(MR.fonts.Mikar.mikar.fontResourceId))
 
         Column {
-                Children(
-                        stack = childStack,
+                Children(stack = component.childStack,
                         modifier = Modifier.weight(weight = 1F),
-                        animation = tabAnimation()
-                ) {
-                        when (val child = it.instance) {
-                                is TabComponent.Child.FirstTab ->
-                                        FirstTabFlowUI(component = child.component)
+                        animation = tabAnimation()) {
+                        when (val instance = it.instance) {
+                                is BaseTabComponent.Child.FirstTab ->
+                                        FirstTabFlowUI(component = instance.component)
 
-                                is TabComponent.Child.SecondTab ->
-                                        FirstScreenUI(firstScreenComponent = child.component)
+                                is BaseTabComponent.Child.SecondTab ->
+                                        Text("TODO")
                         }
                 }
 
                 BottomNavigation(modifier = Modifier.fillMaxWidth()) {
-                        BottomNavigationItem(
-                                selected = activeComponent is TabComponent.Child.FirstTab,
+                   BottomNavigationItem(
+                                selected = activeComponent is BaseTabComponent.Child.FirstTab,
                                 onClick = component::onFirstTabClicked,
                                 icon = {
                                         Image(
@@ -75,7 +69,7 @@ fun TabUI(component: TabComponent) {
                                 }
                         )
                         BottomNavigationItem(
-                                selected = activeComponent is TabComponent.Child.SecondTab,
+                                selected = activeComponent is BaseTabComponent.Child.SecondTab,
                                 onClick = component::onSecondTabClicked,
                                 icon = {
                                         Image(
@@ -97,8 +91,9 @@ fun TabUI(component: TabComponent) {
         }
 }
 
+
 @Composable
-private fun tabAnimation(): StackAnimation<Any, TabComponent.Child> =
+private fun tabAnimation(): StackAnimation<Any, BaseTabComponent.Child> =
         stackAnimation { child, otherChild, direction ->
                 val index = child.instance.index
                 val otherIndex = otherChild.instance.index

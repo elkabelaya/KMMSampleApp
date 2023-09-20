@@ -17,20 +17,28 @@ struct FirstTabFlowUI: View {
     }
 
     var body: some View {
-        StackView(
-            stackValue: StateValue(component.childStack),
-            getTitle: {_ in  "" },
-            onBack: component.onBackClicked,
-            childContent: {
-                switch $0 {
-                case let first as FirstTabFlowComponentChildFirstScreen:
-                    FirstScreenUI(first.component)
-                case let second as FirstTabFlowComponentChildSecondScreen:
-                    SecondScreenUI(second.component)
-                default:
-                    EmptyView()
+        VStack {
+            Button(String(\.first_tab_button_first_title),
+                   action: component.onFirstClicked)
+            Button(String(\.first_tab_button_second_title),
+                   action: component.onSecondClicked)
+        }.modifier(
+            StackView(
+                stackValue: StateValue(component.childSlot),
+                getTitle: {_ in  "" },
+                onBack: component.onBackClicked,
+                childContent: {
+                    switch $0 {
+                    case let first as FirstTabFlowComponentChildFirstScreen:
+                        FirstScreenUI(first.component, onBackClicked: component.onBackClicked)
+                    case let second as FirstTabFlowComponentChildSecondScreen:
+                        SecondScreenUI(second.component, onBackClicked: component.onBackClicked)
+                    default:
+                        EmptyView()
+                    }
                 }
-            }
+
+            )
         )
     }
 }
