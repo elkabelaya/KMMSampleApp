@@ -12,7 +12,10 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* FirstScreenUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* FirstScreenUI.swift */; };
 		B308AE8DBF4CB41D635DB16B /* ObservedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B308AB43AF207515E8997BF1 /* ObservedValue.swift */; };
-		CE7FADF72A7570E300788125 /* FirstTabFlowUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FADF62A7570E300788125 /* FirstTabFlowUI.swift */; };
+		CE039CD52ABCCC81006133C6 /* AlertUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE039CD42ABCCC81006133C6 /* AlertUI.swift */; };
+		CE039CD72ABD58F8006133C6 /* ThirdScreenUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE039CD62ABD58F8006133C6 /* ThirdScreenUI.swift */; };
+		CE039CD92ABD5A0F006133C6 /* FourthScreenUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE039CD82ABD5A0F006133C6 /* FourthScreenUI.swift */; };
+		CE7FADF72A7570E300788125 /* ZeroScreenUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FADF62A7570E300788125 /* ZeroScreenUI.swift */; };
 		CE7FADF92A763B4800788125 /* SecondScreenUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FADF82A763B4800788125 /* SecondScreenUI.swift */; };
 		CE7FADFD2A76518A00788125 /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FADFC2A76518A00788125 /* StackView.swift */; };
 		CE8B16922AADB47200D0DBF6 /* StringResourceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B16912AADB47200D0DBF6 /* StringResourceExtensions.swift */; };
@@ -43,7 +46,10 @@
 		7555FF82242A565900829871 /* FirstScreenUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstScreenUI.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B308AB43AF207515E8997BF1 /* ObservedValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservedValue.swift; sourceTree = "<group>"; };
-		CE7FADF62A7570E300788125 /* FirstTabFlowUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTabFlowUI.swift; sourceTree = "<group>"; };
+		CE039CD42ABCCC81006133C6 /* AlertUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUI.swift; sourceTree = "<group>"; };
+		CE039CD62ABD58F8006133C6 /* ThirdScreenUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdScreenUI.swift; sourceTree = "<group>"; };
+		CE039CD82ABD5A0F006133C6 /* FourthScreenUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourthScreenUI.swift; sourceTree = "<group>"; };
+		CE7FADF62A7570E300788125 /* ZeroScreenUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroScreenUI.swift; sourceTree = "<group>"; };
 		CE7FADF82A763B4800788125 /* SecondScreenUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondScreenUI.swift; sourceTree = "<group>"; };
 		CE7FADFC2A76518A00788125 /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 		CE8B16912AADB47200D0DBF6 /* StringResourceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringResourceExtensions.swift; sourceTree = "<group>"; };
@@ -92,17 +98,15 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				CE039CDD2ABD8422006133C6 /* Tabs */,
+				CE039CDC2ABD8416006133C6 /* Alerts */,
+				CE039CDB2ABD8407006133C6 /* Utils */,
+				CE039CDA2ABD83D1006133C6 /* Screens */,
 				CE8B16902AADB45800D0DBF6 /* SharedExtensions */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
-				7555FF82242A565900829871 /* FirstScreenUI.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
-				B308AB43AF207515E8997BF1 /* ObservedValue.swift */,
-				CE7FADF62A7570E300788125 /* FirstTabFlowUI.swift */,
-				CE7FADF82A763B4800788125 /* SecondScreenUI.swift */,
-				CE7FADFC2A76518A00788125 /* StackView.swift */,
-				CEA50BE12AB0B33A00D16F07 /* TabUI.swift */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -112,6 +116,43 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE039CDA2ABD83D1006133C6 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				CE7FADF62A7570E300788125 /* ZeroScreenUI.swift */,
+				7555FF82242A565900829871 /* FirstScreenUI.swift */,
+				CE7FADF82A763B4800788125 /* SecondScreenUI.swift */,
+				CE039CD62ABD58F8006133C6 /* ThirdScreenUI.swift */,
+				CE039CD82ABD5A0F006133C6 /* FourthScreenUI.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		CE039CDB2ABD8407006133C6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				B308AB43AF207515E8997BF1 /* ObservedValue.swift */,
+				CE7FADFC2A76518A00788125 /* StackView.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		CE039CDC2ABD8416006133C6 /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				CE039CD42ABCCC81006133C6 /* AlertUI.swift */,
+			);
+			path = Alerts;
+			sourceTree = "<group>";
+		};
+		CE039CDD2ABD8422006133C6 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				CEA50BE12AB0B33A00D16F07 /* TabUI.swift */,
+			);
+			path = Tabs;
 			sourceTree = "<group>";
 		};
 		CE8B16902AADB45800D0DBF6 /* SharedExtensions */ = {
@@ -229,13 +270,16 @@
 				CE8B16962AADCFFE00D0DBF6 /* FontResourceExtensions.swift in Sources */,
 				CE8B16922AADB47200D0DBF6 /* StringResourceExtensions.swift in Sources */,
 				CEA50BE22AB0B33A00D16F07 /* TabUI.swift in Sources */,
+				CE039CD92ABD5A0F006133C6 /* FourthScreenUI.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
-				CE7FADF72A7570E300788125 /* FirstTabFlowUI.swift in Sources */,
+				CE7FADF72A7570E300788125 /* ZeroScreenUI.swift in Sources */,
 				CE8B16942AADC77D00D0DBF6 /* ImageResourceExtensions.swift in Sources */,
 				7555FF83242A565900829871 /* FirstScreenUI.swift in Sources */,
 				B308AE8DBF4CB41D635DB16B /* ObservedValue.swift in Sources */,
 				CE7FADF92A763B4800788125 /* SecondScreenUI.swift in Sources */,
 				CE7FADFD2A76518A00788125 /* StackView.swift in Sources */,
+				CE039CD52ABCCC81006133C6 /* AlertUI.swift in Sources */,
+				CE039CD72ABD58F8006133C6 /* ThirdScreenUI.swift in Sources */,
 				CE8B16992AADDC3700D0DBF6 /* ColorResourceExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -27,7 +27,7 @@ struct TabUI: View {
 
 
             })){
-                ForEach( component.tabs, id:\.self ){tabConfig in
+                ForEach( component.tabs, id:\.self ){ tabConfig in
                     ChildView(child: tabConfig)
                         .tabItem {
                             VStack {
@@ -35,7 +35,6 @@ struct TabUI: View {
                                  getImage(child:tabConfig)
                                  */
                                 Text(getTitle(child:tabConfig))
-
                             }
 
                         }
@@ -80,7 +79,7 @@ private struct ChildView: View {
     var body: some View {
         switch child {
         case let child as BaseTabComponentChild.FirstTab:
-            FirstTabFlowUI(child.component)
+            ZeroScreenUI(child.component)
         case let child as BaseTabComponentChild.SecondTab:
             Text("TODO")
         default:

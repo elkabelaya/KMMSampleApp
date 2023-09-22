@@ -10,16 +10,16 @@ struct iOSApp: App {
     @Environment(\.scenePhase)
     var scenePhase: ScenePhase
 
-    private var FirstTabFlowHolder: FirstTabFlowHolder { appDelegate.FirstTabFlowHolder }
+    private var ZeroScreenHolder: ZeroScreenHolder { appDelegate.ZeroScreenHolder }
 
 	var body: some Scene {
 		WindowGroup {
-            TabUI(FirstTabFlowHolder.FirstTabFlow)
+            TabUI(ZeroScreenHolder.ZeroScreen)
             .onChange(of: scenePhase) { newPhase in
                 switch newPhase {
-                case .background: LifecycleRegistryExtKt.stop(FirstTabFlowHolder.lifecycle)
-                case .inactive: LifecycleRegistryExtKt.pause(FirstTabFlowHolder.lifecycle)
-                case .active: LifecycleRegistryExtKt.resume(FirstTabFlowHolder.lifecycle)
+                case .background: LifecycleRegistryExtKt.stop(ZeroScreenHolder.lifecycle)
+                case .inactive: LifecycleRegistryExtKt.pause(ZeroScreenHolder.lifecycle)
+                case .active: LifecycleRegistryExtKt.resume(ZeroScreenHolder.lifecycle)
                 @unknown default: break
                 }
             }
@@ -28,17 +28,17 @@ struct iOSApp: App {
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-    fileprivate var FirstTabFlowHolder: FirstTabFlowHolder = .init()
+    fileprivate var ZeroScreenHolder: ZeroScreenHolder = .init()
 }
 
-private class FirstTabFlowHolder: ObservableObject {
+private class ZeroScreenHolder: ObservableObject {
     let lifecycle: LifecycleRegistry
-    let FirstTabFlow: TabComponent
+    let ZeroScreen: TabComponent
 
     init() {
         lifecycle = LifecycleRegistryKt.LifecycleRegistry()
 
-        FirstTabFlow = DefaultTabComponent(
+        ZeroScreen = DefaultTabComponent(
             componentContext: DefaultComponentContext(lifecycle: lifecycle)
         )
 

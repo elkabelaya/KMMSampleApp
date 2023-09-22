@@ -30,51 +30,77 @@ struct StackView<T: AnyObject, ChildContent: View>: ViewModifier {
     @ViewBuilder
     var childContent: (Any?) -> ChildContent
 
+    var alertContent: (Any?) -> Alert
+
     //private var stack: [Child<AnyObject, T>] { stackValue.items }
     private var slot: Child<AnyObject, T>? { stackValue.child }
+
     func body(content: Content) -> some View {
-        // iOS 16.0 has an issue with swipe back see https://stackoverflow.com/questions/73978107/incomplete-swipe-back-gesture-causes-navigationpath-mismanagement
-        if #available(iOS 16.1, *) {
-            NavigationStack/*(
-                path: Binding(
-                    get: {
-                        [slot]
-
-                    },
-                    set: { updatedPath in onBack(Int32(updatedPath.count)) }
+        NavigationView {
+            content
+                .background(
+                    NavigationLink(
+                        destination: childContent(stackValue.child?.instance),
+                        isActive: Binding(
+                            get: {
+                                (stackValue.child?.instance as? TypedChild)?.type == ChildType.screen
+                            },
+                            set: { if !$0 {
+                                    onBack()
+                                }
+                            }
+                        )
+                    ) {}
                 )
-                            ) */{
-                                    content
-                                    .background(
-                                        NavigationLink(destination: childContent(stackValue.child?.instance), isActive: Binding(
-                                            get: { self.stackValue.child != nil },
-                                            set: { if !$0 {
-                                                print("\(self.stackValue)")
-                                                onBack()
-                                            }})
-                                        ) {
-                                            EmptyView()
-                                        }
-                                    )
-                                    .onChange(of: stackValue) { _ in
-                                        print("changed \(stackValue)")
-                                    }
-                                    /*.navigationDestination(for: Child<AnyObject, T>.self) {
-                                     childContent($0.instance!)
-                                     }*/
-
+                .alert(
+                    isPresented: Binding(
+                        get: {
+                            (stackValue.child?.instance as? TypedChild)?.type == ChildType.alert
+                        },
+                        set: { if !$0 {
+                                onBack()
+                            }
+                        }
+                    )
+                ) {
+                    alertContent(stackValue.child?.instance)
+                }
+                .sheet(
+                    isPresented: Binding(
+                        get: {
+                            (stackValue.child?.instance as? TypedChild)?.type == ChildType.bottomsheet
+                        },
+                        set: { if !$0 {
+                                onBack()
+                            }
+                        }
+                    )
+                ) {
+                    NavigationView {//to open fullscreen cover from sheet
+                        childContent(stackValue.child?.instance)
+                    }
+                }
+                .fullScreenCover(
+                    isPresented: Binding(
+                        get: {
+                            (stackValue.child?.instance as? TypedChild)?.type == ChildType.fullscreencover
+                        },
+                        set: { if !$0 {
+                                onBack()
+                            }
+                        }
+                    )
+                )
+            {
+                childContent(stackValue.child?.instance)
             }
-            /*}*/
-        } /*else {
-            StackInteropView(
-                components: stack.map { $0.instance! },
-                getTitle: getTitle,
-                onBack: onBack,
-                childContent: childContent
-            )
-        }*/
+
+        }
+        .navigationViewStyle(.stack)
     }
 }
+
+
 
 private struct StackInteropView<T: AnyObject, Content: View>: UIViewControllerRepresentable {
     var components: [T]

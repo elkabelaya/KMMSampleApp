@@ -1,4 +1,4 @@
-package com.elkabelaya.kmmsampleapp
+package com.elkabelaya.kmmsampleapp.screens
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
@@ -10,11 +10,14 @@ data class SecondScreenState(
 
 interface SecondScreenComponent {
     val state: Value<SecondScreenState>
+    fun onBackClick()
 }
 
 class DefaultSecondScreenComponent(
     componentContext: ComponentContext,
-    initialValue: String
+    initialValue: String,
+    val dismiss: () -> Unit
 ) : ComponentContext by componentContext, SecondScreenComponent {
     override val state = MutableValue(SecondScreenState(initialValue))
+    override fun onBackClick() { dismiss() }
 }

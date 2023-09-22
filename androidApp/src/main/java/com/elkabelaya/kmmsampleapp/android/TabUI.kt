@@ -41,7 +41,7 @@ fun TabUI(component: TabComponent) {
                         animation = tabAnimation()) {
                         when (val instance = it.instance) {
                                 is BaseTabComponent.Child.FirstTab ->
-                                        FirstTabFlowUI(component = instance.component)
+                                        ZeroScreenUI(component = instance.component)
 
                                 is BaseTabComponent.Child.SecondTab ->
                                         Text("TODO")

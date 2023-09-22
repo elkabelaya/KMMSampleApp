@@ -7,13 +7,10 @@ struct FirstScreenUI: View {
    @State var isBSPresented: Bool = false
    @ObservedObject
    private var state: ObservableValue<FirstScreenState>
-    private var onBackClicked: () -> Void
 
-   init(_ component: FirstScreenComponent,
-        onBackClicked: @escaping () -> Void) {
+   init(_ component: FirstScreenComponent) {
        self.component = component
        state = ObservableValue<FirstScreenState>(component.state)
-       self.onBackClicked = onBackClicked
    }
 
     func getCounterText(quantity: Int32) -> String {
@@ -43,13 +40,16 @@ struct FirstScreenUI: View {
                                    set: component.onChangeText))
            .padding(4)
            .border(.black, width: 2)
-           Button(action: { component.onShowAlertClick() }) {
-               Text("show Alert")
+           Button(action: component.onShowFirstAlertClick ) {
+               Text("show text Alert")
            }
-           Button(action: { component.onNextScreen(value: "\(state.value.count)") }) {
+           Button(action: component.onShowSecondAlertClick ) {
+               Text("show count Alert")
+           }
+           Button(action: component.onNextScreen) {
                Text("go next")
            }
-           Button(action: { isBSPresented = true }) {
+           Button(action: component.onShowBottomSheetClick) {
                Text("sheet")
            }
         }
@@ -61,43 +61,34 @@ struct FirstScreenUI: View {
                     .foregroundColor(Color(\.title_color))
             }
         }
-        .alert(isPresented: .constant(state.value.showAlert)) {
-              Alert(
-                  title: Text("title"),
-                  message: Text("text"),
-                  primaryButton: .default(
-                    Text("Got it!"),
-                    action: {
-                        component.onCloseAlertClick()
-                    }),
-                  secondaryButton: .default(
-                    Text("close"),
-                    action: {
-                        component.onCloseAlertClick()
-                    })
-              )
-          }
-        .sheet(isPresented: $isBSPresented) {
-            NavigationView {
-                ScrollView {
-                    LazyVStack {
-                        Text("sheet")
-                            .onTapGesture {
-                                isPresented = true
-                            }
-                            .fullScreenCover(isPresented: $isPresented) {
-                                Text("fullScreenCover")
-                                    .onTapGesture {
-                                        isPresented = false
-                                    }
-                            }
-                        ForEach(0...100, id:\.self) { index in
-                            Text("\(index)")
-                        }
+        .modifier(
+            StackView(
+                stackValue: StateValue(component.childSlot),
+                getTitle: {_ in  "" },
+                onBack: component.onBackClicked,
+                childContent: {
+                    switch $0 {
+                    case let first as FirstScreenComponentChild.FirstScreen:
+                        SecondScreenUI(first.component)
+                    case let bottomSheet as FirstScreenComponentChild.FirstBottomSheet:
+                        SecondScreenUI(bottomSheet.component)
+                    default:
+                        EmptyView()
+                    }
+                },
+                alertContent: {
+                    switch $0 {
+                    case let alert as FirstScreenComponentChild.FirstAlert:
+                        return AlertUI().getAlert(component: alert.component)
+                    case let alert as FirstScreenComponentChild.SecondAlert:
+                        return AlertUI().getAlert(component: alert.component)
+                    default:
+                        return AlertUI().getAlert(component: nil)
                     }
                 }
-            }
-        }
+            )
+        )
+        
 
     }
 }

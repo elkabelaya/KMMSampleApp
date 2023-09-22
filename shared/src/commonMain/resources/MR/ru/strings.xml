@@ -8,4 +8,6 @@
 
     <string name="first_tab_button_first_title">Перейти на страницу 1</string>
     <string name="first_tab_button_second_title">Перейти на страницу 2</string>
+    <string name="first_tab_button_alert_title">Показать алерт</string>
+    <string name="first_tab_button_bs_title">Показать боттомшит</string>
 </resources>

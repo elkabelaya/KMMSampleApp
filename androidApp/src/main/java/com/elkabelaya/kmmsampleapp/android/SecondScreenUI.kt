@@ -1,13 +1,10 @@
 package com.elkabelaya.kmmsampleapp.android
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -16,13 +13,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
-import com.elkabelaya.kmmsampleapp.SecondScreenComponent
+import com.elkabelaya.kmmsampleapp.screens.SecondScreenComponent
 
 
 @Composable
-fun SecondScreenUI(secondScreenComponent: SecondScreenComponent,
-                   onBackClicked: () -> Unit) {
-    val state by secondScreenComponent.state.subscribeAsState()
+fun SecondScreenUI(component: SecondScreenComponent) {
+    val state by component.state.subscribeAsState()
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -32,7 +28,8 @@ fun SecondScreenUI(secondScreenComponent: SecondScreenComponent,
             .fillMaxHeight()
             .background(Color.Yellow)
     ) {
-        Button(onClick = onBackClicked) {
+        Text("passed value is: ${state.value}")
+        Button(onClick = component::onBackClick) {
             Text("Go back")
         }
     }
