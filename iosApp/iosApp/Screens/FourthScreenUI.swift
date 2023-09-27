@@ -19,7 +19,7 @@ struct FourthScreenUI: View {
         VStack {
             Text("This is a forth screen")
             Button("close",
-                   action: component.onBackClick)
+                   action: component.onCloseClick)
             Button("go to first screen",
                    action: component.onNextClick)
         }

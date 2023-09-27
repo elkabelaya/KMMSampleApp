@@ -28,17 +28,19 @@ struct TabUI: View {
 
             })){
                 ForEach( component.tabs, id:\.self ){ tabConfig in
-                    ChildView(child: tabConfig)
-                        .tabItem {
-                            VStack {
-                                /*WTF?
-                                 getImage(child:tabConfig)
-                                 */
-                                Text(getTitle(child:tabConfig))
+                    
+                        ChildView(child: tabConfig)
+                            .tabItem {
+                                VStack {
+                                    /*WTF?
+                                     getImage(child:tabConfig)
+                                     */
+                                    Text(getTitle(child:tabConfig))
+                                }
+                                
                             }
-
-                        }
-                        .tag(tabConfig.index)
+                            .tag(tabConfig.index)
+                   
                 }
             }
             .accentColor(.purple)
@@ -77,14 +79,17 @@ private struct ChildView: View {
     let child: BaseTabComponentChild
 
     var body: some View {
-        switch child {
-        case let child as BaseTabComponentChild.FirstTab:
-            ZeroScreenUI(child.component)
-        case let child as BaseTabComponentChild.SecondTab:
-            Text("TODO")
-        default:
-            EmptyView()//недостижимое условие
+        NavigationView {
+            switch child {
+            case let child as BaseTabComponentChild.FirstTab:
+                ZeroScreenUI(child.component)
+            case let child as BaseTabComponentChild.SecondTab:
+                Text("TODO")
+            default:
+                EmptyView()//недостижимое условие
+            }
         }
+        .navigationViewStyle(.stack)
     }
 }
 

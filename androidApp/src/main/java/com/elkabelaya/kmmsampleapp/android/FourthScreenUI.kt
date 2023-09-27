@@ -49,7 +49,7 @@ fun FourthScreenUI(component: FourthScreenComponent) {
                 ) {
                     Text("This is a forth screen")
                     Button(
-                        onClick = component::onBackClick,
+                        onClick = component::onCloseClick,
                         modifier = Modifier.padding(top = 16.dp)
                     ) {
                         Text("Close")

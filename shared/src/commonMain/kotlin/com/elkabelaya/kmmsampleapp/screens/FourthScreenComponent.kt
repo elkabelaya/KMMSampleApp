@@ -26,6 +26,8 @@ interface FourthScreenComponent {
     val childSlot: Value<ChildSlot<*, Child>>
     fun onBackClick()
     fun onNextClick()
+
+    fun onCloseClick()
     sealed class Child(override val type: ChildType): TypedChild {
         class FirstScreen(val component: FirstScreenComponent) : Child(type = ChildType.SCREEN)
     }
@@ -45,7 +47,11 @@ class DefaultFourthScreenComponent(
             childFactory = ::createChild)
     override val childSlot: Value<ChildSlot<*, FourthScreenComponent.Child>> = _childSlot
 
-    override fun onBackClick()  = dismiss()
+    override fun onBackClick()  {
+        slotNavigation.dismiss()
+    }
+
+    override fun onCloseClick() = dismiss()
     override fun onNextClick() {
         slotNavigation.activate(ForthScreenChildConfig.FirstScreen)
     }

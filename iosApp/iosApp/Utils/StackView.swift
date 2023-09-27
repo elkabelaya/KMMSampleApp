@@ -32,71 +32,71 @@ struct StackView<T: AnyObject, ChildContent: View>: ViewModifier {
 
     var alertContent: (Any?) -> Alert
 
-    //private var stack: [Child<AnyObject, T>] { stackValue.items }
     private var slot: Child<AnyObject, T>? { stackValue.child }
 
     func body(content: Content) -> some View {
-        NavigationView {
-            content
-                .background(
-                    NavigationLink(
-                        destination: childContent(stackValue.child?.instance),
-                        isActive: Binding(
-                            get: {
-                                (stackValue.child?.instance as? TypedChild)?.type == ChildType.screen
-                            },
-                            set: { if !$0 {
-                                    onBack()
-                                }
-                            }
-                        )
-                    ) {}
-                )
-                .alert(
-                    isPresented: Binding(
+        content
+            .background(
+                NavigationLink(
+                    destination: childContent(stackValue.child?.instance),
+                    isActive: Binding(
                         get: {
-                            (stackValue.child?.instance as? TypedChild)?.type == ChildType.alert
+                            (stackValue.child?.instance as? TypedChild)?.type == ChildType.screen
                         },
-                        set: { if !$0 {
+                        set: {
+                            if !$0 {
                                 onBack()
                             }
                         }
                     )
-                ) {
-                    alertContent(stackValue.child?.instance)
-                }
-                .sheet(
-                    isPresented: Binding(
-                        get: {
-                            (stackValue.child?.instance as? TypedChild)?.type == ChildType.bottomsheet
-                        },
-                        set: { if !$0 {
-                                onBack()
-                            }
+                ) {}
+            )
+            .alert(
+                isPresented: Binding(
+                    get: {
+                        (stackValue.child?.instance as? TypedChild)?.type == ChildType.alert
+                    },
+                    set: { if !$0 {
+                            onBack()
                         }
-                    )
-                ) {
-                    NavigationView {//to open fullscreen cover from sheet
-                        childContent(stackValue.child?.instance)
                     }
-                }
-                .fullScreenCover(
-                    isPresented: Binding(
-                        get: {
-                            (stackValue.child?.instance as? TypedChild)?.type == ChildType.fullscreencover
-                        },
-                        set: { if !$0 {
-                                onBack()
-                            }
-                        }
-                    )
                 )
-            {
-                childContent(stackValue.child?.instance)
+            ) {
+                alertContent(stackValue.child?.instance)
             }
-
-        }
-        .navigationViewStyle(.stack)
+            .sheet(
+                isPresented: Binding(
+                    get: {
+                        (stackValue.child?.instance as? TypedChild)?.type == ChildType.bottomsheet
+                    },
+                    set: { if !$0 {
+                            onBack()
+                        }
+                    }
+                )
+            ) {
+                NavigationView {//to open fullscreen cover from sheet
+                    childContent(stackValue.child?.instance)
+                }
+                .navigationViewStyle(.stack)
+            }
+            .fullScreenCover(
+                isPresented: Binding(
+                    get: {
+                        (stackValue.child?.instance as? TypedChild)?.type == ChildType.fullscreencover
+                    },
+                    set: { if !$0 {
+                            onBack()
+                        }
+                    }
+                )
+            )
+            {
+                NavigationView {//to navigate in fullScreenCover
+                    childContent(stackValue.child?.instance)
+                }
+                .navigationViewStyle(.stack)
+            }
     }
 }
 
