@@ -10,7 +10,7 @@ import shared
 import SwiftUI
 
 extension SwiftUI.Color {
-     init(_ resource: KeyPath<MR.colors, ColorResource>) {
+    init(_ resource: KeyPath<MR.colors, shared.ColorResource>) {
          self.init(MR.colors()[keyPath: resource].getUIColor())
      }
 }

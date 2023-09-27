@@ -10,7 +10,7 @@ import shared
 import SwiftUI
 
 extension Image {
-    init(_ resource: KeyPath<MR.images, ImageResource>) {
+    init(_ resource: KeyPath<MR.images, shared.ImageResource>) {
         self.init(uiImage: MR.images()[keyPath: resource].toUIImage()!)
     }
 }

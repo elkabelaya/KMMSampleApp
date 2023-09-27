@@ -15,7 +15,7 @@ kotlin {
             }
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -23,6 +23,9 @@ kotlin {
     ).forEach {
         it.binaries.framework {
             baseName = "shared"
+            if (System.getenv("XCODE_VERSION_MAJOR") == "1500") {
+                linkerOpts += "-ld64"
+            }
             export("com.arkivanov.decompose:decompose:2.0.1")
             export("com.arkivanov.essenty:lifecycle:1.1.0")
             export("dev.icerock.moko:resources:0.23.0")
